@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_vacation">Create Vacation</string>
+    <string name="enter_a_vacation_title">Enter a Vacation Title</string>
+</resources>

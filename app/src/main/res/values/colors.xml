@@ -11,6 +11,10 @@
         <!--   a secondary color for controls like checkboxes and text fields. -->
         <color name="colorAccent">#FF4081</color>
 
-        <!--   Color for the Floating Action Button -->
-        <color name="fabColor">#238E84</color>
+        <!--   Color for recycler card -->
+        <color name="cardColor">#238E84</color>
+
+        <color name="white">#ffff</color>
+
+        <color name="black">#000</color>
     </resources>

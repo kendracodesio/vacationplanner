@@ -3,4 +3,6 @@
     <string name="vacation_planner">Vacation Planner</string>
     <string name="enter">Enter</string>
     <string name="add_a_vacation">add a vacation</string>
+    <string name="create_vacation">Create Vacation</string>
+    <string name="enter_a_vacation_title">Enter a Vacation Title</string>
 </resources>

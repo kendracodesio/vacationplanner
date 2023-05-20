@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AddVacation">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/vacationTitleInput"
+        android:layout_width="256dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="72dp"
+        android:hint="@string/enter_a_vacation_title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createVacationBtn"
+        android:layout_width="176dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/create_vacation"
+        android:textColor="@color/design_default_color_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <Button-->
+<!--        android:id="@+id/pickDateButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Pick Date" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
