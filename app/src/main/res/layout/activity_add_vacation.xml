@@ -7,29 +7,65 @@
     tools:context=".UI.AddVacation">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/lodgingInput"
+        android:layout_width="256dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="188dp"
+        android:hint="Add Hotel/Lodging Info"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/vacationTitleInput"
         android:layout_width="256dp"
         android:layout_height="58dp"
-        android:layout_marginTop="72dp"
-        android:hint="@string/enter_a_vacation_title"
+        android:layout_marginTop="96dp"
+        android:hint="Add Title (e.g. Spring Break)"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/createVacationBtn"
-        android:layout_width="176dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="262dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="140dp"
         android:background="@drawable/rounded_button"
         android:text="@string/create_vacation"
         android:textColor="@color/design_default_color_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonStartDate"
+        android:layout_width="256dp"
+        android:layout_height="52dp"
+        android:text="Select Start Date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <Button
+        android:id="@+id/buttonEndDate"
+        android:layout_width="256dp"
+        android:layout_height="52dp"
+        android:text="select end date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.564" />
 
     <!--    <Button-->
 <!--        android:id="@+id/pickDateButton"-->

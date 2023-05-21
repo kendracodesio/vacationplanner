@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "excursions",
         foreignKeys = @ForeignKey(entity = Vacation.class,
                                 parentColumns = "id",
@@ -17,6 +19,7 @@ public class Excursion {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+
     @ColumnInfo(name = "vacation_id")
     private int vacationId;
 
@@ -25,6 +28,7 @@ public class Excursion {
         this.id = id;
         this.vacationId = vacationId;
     }
+
 
     public Excursion() {
     }
@@ -36,6 +40,7 @@ public class Excursion {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public int getVacationId() {
         return vacationId;
