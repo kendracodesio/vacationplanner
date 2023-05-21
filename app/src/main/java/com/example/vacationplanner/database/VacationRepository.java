@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.vacationplanner.dao.ExcursionDao;
 import com.example.vacationplanner.dao.VacationDao;
+import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import java.util.concurrent.Future;
 
 
 public class VacationRepository {
-    private VacationDao mVacationDao;
+    private final VacationDao mVacationDao;
+    private ExcursionDao mExcursionDao;
     private List<Vacation> mAllVacations;
 
     private static int NUMBER_OF_THREADS = 4;
@@ -68,6 +70,9 @@ public class VacationRepository {
         return mVacationDao.getAllVacations();
     }
 
+    public LiveData<List<Excursion>> getExcursionsByVacation(int vacationId){
+        return mVacationDao.getExcursionsByVacation(vacationId);}
+
     public interface DeleteCallback {
         void onDelete(boolean isDeleted);
     }
@@ -84,7 +89,46 @@ public class VacationRepository {
             callback.onDelete(isDeleted);
         });
     }
+    public void insertExcursion(Excursion excursion) {
+        CountDownLatch latch = new CountDownLatch(1);
+        databaseExecutor.execute(() -> {
+            mExcursionDao.insertExcursion(excursion);
+            latch.countDown();
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void updateExcursion(Excursion excursion) {
+        CountDownLatch latch = new CountDownLatch(1);
+        databaseExecutor.execute(() -> {
+            mExcursionDao.updateExcursion(excursion);
+            latch.countDown();
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void deleteExcursion(Excursion excursion) {
+        CountDownLatch latch = new CountDownLatch(1);
+        databaseExecutor.execute(() -> {
+            mExcursionDao.deleteExcursion(excursion);
+            latch.countDown();
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public LiveData<Excursion> getExcursionById(int excursionId) {
+        return mExcursionDao.getExcursionById(excursionId);
+    }
 }

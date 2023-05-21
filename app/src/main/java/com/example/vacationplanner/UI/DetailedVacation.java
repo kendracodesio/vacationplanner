@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.vacationplanner.R;
@@ -31,6 +32,7 @@ public class DetailedVacation extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_vacation);
 
         vacationRepository = new VacationRepository(getApplication());
+        Button addExcursionBtn = findViewById(R.id.addExcursionBtn);
 
         Intent intent = getIntent();
         int vacationId = intent.getIntExtra("vacation_id", -1);
@@ -51,6 +53,13 @@ public class DetailedVacation extends AppCompatActivity {
             });
 
         }
+
+        addExcursionBtn.setOnClickListener(v -> {
+            Intent addExcursionIntent = new Intent(DetailedVacation.this, AddExcursion.class);
+            addExcursionIntent.putExtra("vacation_id", vacation.getId());
+            startActivity(addExcursionIntent);
+        });
+
     }
 
     @Override

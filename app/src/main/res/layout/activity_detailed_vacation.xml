@@ -38,8 +38,8 @@
 
     <Button
         android:id="@+id/addExcursionBtn"
-        android:layout_width="222dp"
-        android:layout_height="45dp"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_button"
         android:text="+ Add Excursion"
         android:textColor="@color/design_default_color_background"

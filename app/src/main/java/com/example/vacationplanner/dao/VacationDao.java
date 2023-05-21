@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public interface VacationDao {
 
     @Query("SELECT COUNT(*) FROM excursions WHERE vacation_id = :vacationId")
     int getExcursionCountForVacation(int vacationId);
+
+    @Query("SELECT * FROM excursions WHERE vacation_id= :vacationId")
+    LiveData<List<Excursion>> getExcursionsByVacation(int vacationId);
 }
