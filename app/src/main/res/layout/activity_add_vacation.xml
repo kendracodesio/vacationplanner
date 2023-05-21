@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UI.AddVacation">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/lodgingInput"
-        android:layout_width="256dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="188dp"
-        android:hint="Add Hotel/Lodging Info"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/vacationTitleInput"
@@ -29,6 +18,19 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/lodgingInput"
+        android:layout_width="256dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="188dp"
+        android:hint="Add Hotel/Lodging Info"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/createVacationBtn"
@@ -67,10 +69,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.564" />
 
-    <!--    <Button-->
-<!--        android:id="@+id/pickDateButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Pick Date" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

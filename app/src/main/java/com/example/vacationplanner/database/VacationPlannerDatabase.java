@@ -12,7 +12,7 @@ import com.example.vacationplanner.dao.VacationDao;
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 
-@Database(entities = {Vacation.class, Excursion.class}, version = 2, exportSchema = false)
+@Database(entities = {Vacation.class, Excursion.class}, version = 3, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class VacationPlannerDatabase extends RoomDatabase {
     public abstract VacationDao vacationDao();

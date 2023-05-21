@@ -2,4 +2,9 @@
 <resources>
     <string name="create_vacation">Create Vacation</string>
     <string name="enter_a_vacation_title">Enter a Vacation Title</string>
+    <string name="select_start_date">Select Start Date</string>
+    <string name="add_hotel_lodging_info">Add Hotel/Lodging Info</string>
+    <string name="add_title_e_g_spring_break">Add Title (e.g. Spring Break)</string>
+    <string name="select_end_date">select end date</string>
+    <string name="save">Save</string>
 </resources>

@@ -70,6 +70,7 @@ public class Vacation {
         this.startDate = startDate;
     }
 
+
     public Date getEndDate() {
         return endDate;
     }
@@ -77,6 +78,8 @@ public class Vacation {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+
 
 
 }
