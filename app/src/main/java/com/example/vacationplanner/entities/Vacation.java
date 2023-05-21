@@ -25,9 +25,7 @@ public class Vacation {
     private Date endDate;
 
 
-
-
-    public Vacation(int id, String title, String lodgingInfo, Date startDate, Date endDate, List<Excursion> excursions) {
+    public Vacation(int id, String title, String lodgingInfo, Date startDate, Date endDate) {
         this.id = id;
         this.title = title;
         this.lodgingInfo = lodgingInfo;
