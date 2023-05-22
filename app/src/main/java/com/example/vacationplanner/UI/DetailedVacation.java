@@ -106,16 +106,7 @@ public class DetailedVacation extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == R.id.action_delete) {
-            vacationRepository.deleteVacation(vacation, isDeleted -> {
-                if (isDeleted) {
-                    finish();
-                } else {
-                    Toast.makeText(DetailedVacation.this, "Cannot delete vacation with existing excursions", Toast.LENGTH_LONG).show();
-                }
-            });
-            return true;
-        } else if (item.getItemId() == R.id.action_edit) {
+        if (item.getItemId() == R.id.action_edit) {
             Intent editIntent = new Intent(DetailedVacation.this, EditVacation.class );
             editIntent.putExtra("vacation_id", vacationId);
             startActivity(editIntent);

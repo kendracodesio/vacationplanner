@@ -37,6 +37,11 @@ public class VL_RecyclerViewAdapter extends RecyclerView.Adapter<VL_RecyclerView
         notifyDataSetChanged();
     }
 
+    public Vacation getVacationAtPosition(int position) {
+        return vacationList.get(position);
+    }
+
+
     @NonNull
     @Override
     public VL_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
