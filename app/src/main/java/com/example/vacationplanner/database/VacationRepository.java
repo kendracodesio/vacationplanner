@@ -31,6 +31,7 @@ public class VacationRepository {
     public VacationRepository(Application application) {
         VacationPlannerDatabase db = VacationPlannerDatabase.getDatabase(application);
         mVacationDao = db.vacationDao();
+        mExcursionDao = db.excursionDao();
 
     }
 

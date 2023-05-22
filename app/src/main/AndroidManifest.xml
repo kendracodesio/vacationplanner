@@ -13,9 +13,13 @@
         android:theme="@style/Theme.VacationPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".UI.DetailedExcursion"
+            android:exported="false" />
+        <activity
             android:name=".UI.AddExcursion"
             android:exported="false"
-            android:label="Add Excursion"/>
+            android:label="Add Excursion"
+            android:parentActivityName=".UI.DetailedVacation" />
         <activity
             android:name=".UI.EditVacation"
             android:exported="false"

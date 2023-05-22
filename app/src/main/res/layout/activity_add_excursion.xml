@@ -6,4 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".UI.AddExcursion">
 
+    <Button
+        android:id="@+id/createExcursionBtn"
+        android:layout_width="262dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/rounded_button"
+        android:text="create excursion"
+        android:textColor="@color/design_default_color_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/excursionDateBtn"
+        android:layout_width="256dp"
+        android:layout_height="52dp"
+        android:text="select excursion date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/excursionTitleInput"
+        android:layout_width="256dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="184dp"
+        android:hint="Add Title (e.g. Snorkeling)"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vacationTitle2"
+        android:layout_width="397dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:emojiCompatEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
