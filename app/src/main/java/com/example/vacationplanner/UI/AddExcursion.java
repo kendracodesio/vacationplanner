@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,5 +66,25 @@ public class AddExcursion extends AppCompatActivity {
             Toast.makeText(AddExcursion.this, "Excursion created", Toast.LENGTH_SHORT).show();
             finish();
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cancel_menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == R.id.action_cancel) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+
+        }
     }
 }

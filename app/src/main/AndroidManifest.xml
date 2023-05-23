@@ -2,24 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label=""
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_vacation_planner"
+        android:label="Vacation Planner"
+        android:roundIcon="@mipmap/ic_launcher_vacation_planner_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VacationPlanner"
         tools:targetApi="31">
+        <receiver android:name=".UI.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".UI.DetailedExcursion"
             android:exported="false" />
         <activity
             android:name=".UI.AddExcursion"
             android:exported="false"
-            android:label="Add Excursion"
-            android:parentActivityName=".UI.DetailedVacation" />
+            android:label="Add Excursion" />
         <activity
             android:name=".UI.EditVacation"
             android:exported="false"

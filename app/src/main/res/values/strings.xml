@@ -11,4 +11,6 @@
     <string name="add_title_e_g_spring_break">Add Title (e.g. Spring Break)</string>
     <string name="select_end_date">select end date</string>
     <string name="save">Save</string>
+    <string name="channel_name">Vacation Alerts</string>
+    <string name="channel_description">Alerts for upcoming start and end dates of your vacations</string>
 </resources>

@@ -5,8 +5,16 @@
     <item
         android:id="@+id/action_edit"
         android:icon="@drawable/baseline_edit_24"
-        android:title="Edit"
-        app:showAsAction="ifRoom" />
+        android:title="Edit Vacation Details"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/notify_start"
+        android:title="Notify On Start Date"
+        app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/notify_end"
+        android:title="Notify On End Date"
+        app:showAsAction="never"/>
 
 </menu>

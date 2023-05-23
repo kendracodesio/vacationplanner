@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".UI.DetailedVacation">
 
+    <Button
+        android:id="@+id/addExcursionBtn"
+        android:layout_width="222dp"
+        android:layout_height="52dp"
+        android:background="@drawable/rounded_button"
+        android:text="+ Add Excursion"
+        android:textColor="@color/design_default_color_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.274" />
+
     <TextView
         android:id="@+id/vacationTitle"
-        android:layout_width="397dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="388dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="sans-serif-medium"
         android:text="TextView"
         android:textAlignment="center"
@@ -18,6 +31,7 @@
         android:textStyle="bold"
         app:emojiCompatEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +39,7 @@
         android:id="@+id/vacationDetails"
         android:layout_width="355dp"
         android:layout_height="66dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="96dp"
         android:lineSpacingExtra="10sp"
         android:text="TextView"
         android:textAlignment="center"
@@ -35,27 +49,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/addExcursionBtn"
-        android:layout_width="225dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_button"
-        android:text="+ Add Excursion"
-        android:textColor="@color/design_default_color_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/excursionList"
-        android:layout_width="409dp"
-        android:layout_height="480dp"
+        android:layout_width="408dp"
+        android:layout_height="451dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addExcursionBtn"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
