@@ -4,17 +4,22 @@
 
     <item
         android:id="@+id/action_edit"
-        android:icon="@drawable/baseline_edit_24"
-        android:title="Edit Vacation Details"
+        android:title="@string/edit_vacation"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/share_vacation"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/notify_start"
-        android:title="Notify On Start Date"
+        android:title="@string/notify_on_start_date"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/notify_end"
-        android:title="Notify On End Date"
+        android:title="@string/notify_on_end_date"
         app:showAsAction="never"/>
 
 </menu>

@@ -21,7 +21,10 @@
 
         <activity
             android:name=".UI.DetailedExcursion"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Detailed Excursion"
+            android:parentActivityName=".UI.DetailedVacation"/>
+
         <activity
             android:name=".UI.AddExcursion"
             android:exported="false"

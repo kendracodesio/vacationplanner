@@ -14,4 +14,8 @@
     <string name="save">Save</string>
     <string name="channel_name">Vacation Alerts</string>
     <string name="channel_description">Alerts for upcoming start and end dates of your vacations</string>
+    <string name="edit_vacation">Edit Vacation</string>
+    <string name="share_vacation">Share Vacation</string>
+    <string name="notify_on_start_date">Notify On Start Date</string>
+    <string name="notify_on_end_date">Notify On End Date</string>
 </resources>

@@ -18,7 +18,6 @@ import java.util.List;
 public class EL_RecyclerViewAdapter extends RecyclerView.Adapter<EL_RecyclerViewAdapter.MyViewHolder>{
     Context context;
     List<Excursion> excursionList;
-
     EL_RecyclerViewAdapter.ExcursionItemClickListener clickListener;
 
 

@@ -37,21 +37,16 @@ import java.util.Locale;
 public class DetailedVacation extends AppCompatActivity {
 
     VacationRepository vacationRepository;
-
     int vacationId;
     Vacation vacation;
-
     List<Excursion> excursionList;
-
     EL_RecyclerViewAdapter el_recyclerViewAdapter;
     RecyclerView excursionListRecyclerView;
     int alarmStart = 1;
     int alarmEnd = 2;
-
     int notificationId;
     private boolean startNotificationEnabled = false;
     private boolean endNotificationEnabled = false;
-
 
 
     @Override
@@ -60,8 +55,8 @@ public class DetailedVacation extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_vacation);
 
 
-
         vacationRepository = new VacationRepository(getApplication());
+        excursionList = new ArrayList<>();
 
         Intent intent = getIntent();
         int vacationId = intent.getIntExtra("vacation_id", -1);
@@ -78,22 +73,20 @@ public class DetailedVacation extends AppCompatActivity {
                     this.vacationId = vacation.getId();
                     vacationTitle.setText(vacation.getTitle());
                     vacationDetails.setText(formatVacationDetails(vacation));
-
                 }
             });
+
 
         }
 
         excursionListRecyclerView = findViewById(R.id.excursionList);
-        excursionList = new ArrayList<>();
-        vacationRepository = new VacationRepository(getApplication());
         //Initialize the RecyclerView Adapter
         //gets the excursionId when excursion item is clicked so details can be shown in the DetailedExcursion activity
         el_recyclerViewAdapter = new EL_RecyclerViewAdapter(DetailedVacation.this, excursionList, excursion -> {
-            Intent showExcursionDetails = new Intent(DetailedVacation.this, DetailedExcursion.class);
+            Intent showExcursionDetailsIntent = new Intent(DetailedVacation.this, DetailedExcursion.class);
             Log.d("DetailedVacation", "Excursion Id: to pass to DetailedExcursion: " + excursion.getId());
-            showExcursionDetails.putExtra("excursion_id", excursion.getId());
-            startActivity(intent);
+            showExcursionDetailsIntent.putExtra("excursion_id", excursion.getId());
+            startActivity(showExcursionDetailsIntent);
         });
 
         //Set the adapter to the RecyclerView
@@ -102,8 +95,11 @@ public class DetailedVacation extends AppCompatActivity {
 
 
         vacationRepository.getExcursionsByVacation(vacationId).observe(this, excursions -> {
-            //update the excursions in the adapter
-            el_recyclerViewAdapter.setExcursion(excursions);
+            if (excursions != null) {
+                this.excursionList = excursions;
+                //update the excursions in the adapter
+                el_recyclerViewAdapter.setExcursion(excursions);
+            }
         });
 
 
@@ -114,10 +110,10 @@ public class DetailedVacation extends AppCompatActivity {
             startActivity(addExcursionIntent);
         });
 
+        //setting shared preferences
         SharedPreferences sharedPref = getSharedPreferences("notification_settings", Context.MODE_PRIVATE);
         startNotificationEnabled = sharedPref.getBoolean("startNotificationEnabled_" + vacationId, false);
         endNotificationEnabled = sharedPref.getBoolean("endNotificationEnabled_" + vacationId, false);
-
 
     }
 
@@ -139,7 +135,7 @@ public class DetailedVacation extends AppCompatActivity {
             startNotificationItem.setTitle("Notify Start Date: Off");
         }
 
-        if(endNotificationEnabled) {
+        if (endNotificationEnabled) {
             endNotificationItem.setTitle("Notify End Date: On");
         } else {
             endNotificationItem.setTitle("Notify End Date: Off");
@@ -161,12 +157,13 @@ public class DetailedVacation extends AppCompatActivity {
             editIntent.putExtra("vacation_id", vacationId);
             startActivity(editIntent);
             return true;
-
+        } else if (item.getItemId() == R.id.action_share) {
+            shareVacation();
+            return true;
         } else if (item.getItemId() == R.id.notify_start) {
             notificationId = (vacationId * 10) + alarmStart;
             String startDate = vacation.getStartDate().toString();
             if (startNotificationEnabled) {
-                //Notification is currently enabled, so cancel it
                 cancelAlarm(notificationId);
                 startNotificationEnabled = false;
             } else {
@@ -179,7 +176,6 @@ public class DetailedVacation extends AppCompatActivity {
             notificationId = (vacationId * 10) + alarmEnd;
             String endDate = vacation.getEndDate().toString();
             if (endNotificationEnabled) {
-                //Notification is currently enabled, so cancel it
                 cancelAlarm(notificationId);
                 endNotificationEnabled = false;
             } else {
@@ -193,6 +189,27 @@ public class DetailedVacation extends AppCompatActivity {
         }
 
     }
+
+
+    private void shareVacation() {
+        StringBuilder vacationDetails = new StringBuilder(vacation.getTitle());
+        vacationDetails.append("\n").append(formatVacationDetails(vacation));
+
+        if (excursionList != null && !excursionList.isEmpty()) {
+            vacationDetails.append("\n\nExcursions:\n");
+            for (Excursion excursion : excursionList) {
+                vacationDetails.append("- ").append(excursion.getExcursionTitle()).append("\n");
+            }
+        }
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, vacationDetails.toString());
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, "Share Vacation Details");
+        startActivity(shareIntent);
+    }
+
 
     private void setAlarm(String dateToNotify, int alarmType, int notificationId) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
@@ -212,7 +229,6 @@ public class DetailedVacation extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerDate, pendingIntent);
         Toast.makeText(DetailedVacation.this, "Notification enabled", Toast.LENGTH_SHORT).show();
-
     }
 
     public void cancelAlarm(int notificationId) {
@@ -223,16 +239,13 @@ public class DetailedVacation extends AppCompatActivity {
             alarmManager.cancel(pendingIntent);
             Toast.makeText(DetailedVacation.this, "Notification cancelled", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-
-
-        private String formatVacationDetails (@NotNull Vacation vacation){
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-            String startDate = dateFormat.format(vacation.getStartDate());
-            String endDate = dateFormat.format(vacation.getEndDate());
-            return "Dates: " + startDate + " - " + endDate + "\n Lodging: " + vacation.getLodgingInfo();
-        }
+    private String formatVacationDetails(@NotNull Vacation vacation) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        String startDate = dateFormat.format(vacation.getStartDate());
+        String endDate = dateFormat.format(vacation.getEndDate());
+        return "Dates: " + startDate + " - " + endDate + "\n Lodging: " + vacation.getLodgingInfo();
     }
+}
 
