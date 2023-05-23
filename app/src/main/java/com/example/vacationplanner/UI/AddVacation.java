@@ -95,9 +95,6 @@ public class AddVacation extends AppCompatActivity {
 
         }
         datePickerDialog.show();
-
-
     }
-
 
 }

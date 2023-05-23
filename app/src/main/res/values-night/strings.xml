@@ -18,4 +18,8 @@
     <string name="share_vacation">Share Vacation</string>
     <string name="notify_on_start_date">Notify On Start Date</string>
     <string name="notify_on_end_date">Notify On End Date</string>
+    <string name="back_to_home">Back To Home</string>
+    <string name="excursion">Excursion:</string>
+    <string name="date">Date:</string>
+    <string name="edit">edit</string>
 </resources>

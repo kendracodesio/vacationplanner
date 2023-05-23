@@ -2,6 +2,7 @@ package com.example.vacationplanner.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,10 @@ import com.example.vacationplanner.database.VacationRepository;
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AddExcursion extends AppCompatActivity {
 
@@ -37,7 +42,10 @@ public class AddExcursion extends AppCompatActivity {
 
         TextView vacationTitle = findViewById(R.id.vacationTitle2);
         TextInputEditText excursionTitleInput = findViewById(R.id.excursionTitleInput);
+        Button selectExcursionDate = findViewById(R.id.excursionDateBtn);
         Button createExcursionBtn = findViewById(R.id.createExcursionBtn);
+
+        selectExcursionDate.setOnClickListener(v -> {showDatePickerDialog(selectExcursionDate);});
 
 
         if (vacationId != -1) {
@@ -50,16 +58,21 @@ public class AddExcursion extends AppCompatActivity {
 
                 }
             });
-
-
         }
 
         createExcursionBtn.setOnClickListener(v -> {
             String excursionTitle = excursionTitleInput.getText().toString();
+            Date excursionDate = (Date) selectExcursionDate.getTag();
+
+            if (excursionTitle.isEmpty() || excursionDate == null) {
+                Toast.makeText(AddExcursion.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             Excursion excursion = new Excursion();
             excursion.setVacationId(vacationId);
             excursion.setExcursionTitle(excursionTitle);
+            excursion.setExcursionDate(excursionDate);
             Log.d("AddExcursion", excursion.getExcursionTitle());
             vacationRepository.insertExcursion(excursion);
 
@@ -86,5 +99,22 @@ public class AddExcursion extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
 
         }
+    }
+    private void showDatePickerDialog(Button button) {
+        final Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                AddExcursion.this,
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(year, month, dayOfMonth);
+                    Date selectedDate = calendar.getTime();
+                    button.setText(DateFormat.getDateInstance().format(selectedDate));
+                    button.setTag(selectedDate);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
     }
 }

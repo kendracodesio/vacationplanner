@@ -41,7 +41,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="96dp"
         android:lineSpacingExtra="10sp"
-        android:text="TextView"
+        android:text="Dates: 03/20/2023 - 03/28/2023"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
