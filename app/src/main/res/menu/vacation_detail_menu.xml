@@ -14,12 +14,12 @@
 
     <item
         android:id="@+id/notify_start"
-        android:title="@string/notify_on_start_date"
+        android:title="Notify Start Date: Off"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/notify_end"
-        android:title="@string/notify_on_end_date"
+        android:title="Notify End Date: Off"
         app:showAsAction="never"/>
 
 </menu>

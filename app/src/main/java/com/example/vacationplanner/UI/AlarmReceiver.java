@@ -25,40 +25,59 @@ import java.util.Date;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    private static final String CHANNEL_ID = "vacation_notifications";
+    private static final String CHANNEL_ID_A = "vacation_notifications";
+
 
     String message;
 
     int notificationId;
+    Intent notificationIntent;
+    String vacationTitle;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
         //Fetch the info from the intent
         int vacationId = intent.getIntExtra("vacation_id", -1);
-        int alarmType = intent.getIntExtra("alarm_type", -1);
-        String vacationTitle = intent.getStringExtra("vacation_title");
+        int excursionId = intent.getIntExtra("excursion_id", -1);
+        int notificationId = intent.getIntExtra("notification_id", -1);
+        String alarmType = intent.getStringExtra("alarm_type");
         String date = intent.getStringExtra("date");
 
 
+
         //Determine what message to show and which date to use
-        if (alarmType == 1) {
-            String startDate = intent.getStringExtra("start_date");
+        if (alarmType.equals("1")) {
+            vacationTitle = intent.getStringExtra("vacation_title");
             message = vacationTitle + ": Your vacation starts today! ("+ date +")";
 
         }
-        if (alarmType == 2) {
+        if (alarmType.equals("2")) {
+            vacationTitle = intent.getStringExtra("vacation_title");
             message = vacationTitle + ": Your vacation ends today! ("+ date +")";
 
         }
-        //get the notificationId
-        notificationId = (vacationId * 10) + alarmType;
-        createNotificationChannel(context, CHANNEL_ID);
-        Intent notificationIntent = new Intent(context, DetailedVacation.class);
-        notificationIntent.putExtra("vacation_id", vacationId);
+        if (alarmType.equals("3")) {
+            String excursionTitle = intent.getStringExtra("excursion_title");
+            message = excursionTitle + ": Your excursion is today! ("+ date +")";
+        }
+
+        createNotificationChannel(context, CHANNEL_ID_A);
+
+        if (alarmType.equals("1") || alarmType.equals("2")) {
+            notificationIntent = new Intent(context, DetailedVacation.class);
+            notificationIntent.putExtra("vacation_id", vacationId);
+        }
+
+        if (alarmType.equals("3")) {
+            notificationIntent = new Intent(context, DetailedExcursion.class);
+            notificationIntent.putExtra("excursion_id", excursionId);
+
+        }
+
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID_A)
                 .setContentTitle("Vacation Planner")
                 .setContentText(message)
                 .setSmallIcon(R.drawable.baseline_notifications_24)
@@ -72,11 +91,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     }
 
-    private void createNotificationChannel(Context context, String CHANNEL_ID) {
+    private void createNotificationChannel(Context context, String CHANNEL_ID_A) {
         CharSequence name = context.getResources().getString(R.string.channel_name);
         String description = context.getString(R.string.channel_description);
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID_A, name, importance);
         channel.setDescription(description);
         // Register the channel with the system; you can't change the importance
         // or other notification behaviors after this

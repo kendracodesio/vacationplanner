@@ -45,8 +45,8 @@ public class DetailedVacation extends AppCompatActivity {
     List<Excursion> excursionList;
     EL_RecyclerViewAdapter el_recyclerViewAdapter;
     RecyclerView excursionListRecyclerView;
-    int alarmStart = 1;
-    int alarmEnd = 2;
+    String alarmStart = "1";
+    String alarmEnd = "2";
     int notificationId;
     private boolean startNotificationEnabled = false;
     private boolean endNotificationEnabled = false;
@@ -162,7 +162,8 @@ public class DetailedVacation extends AppCompatActivity {
             shareVacation();
             return true;
         } else if (item.getItemId() == R.id.notify_start) {
-            notificationId = (vacationId * 10) + alarmStart;
+            notificationId = vacationId;
+            notificationId = Integer.parseInt(notificationId + alarmStart);
             String startDate = vacation.getStartDate().toString();
             if (startNotificationEnabled) {
                 cancelAlarm(notificationId);
@@ -174,7 +175,8 @@ public class DetailedVacation extends AppCompatActivity {
             invalidateOptionsMenu();
             return true;
         } else if (item.getItemId() == R.id.notify_end) {
-            notificationId = (vacationId * 10) + alarmEnd;
+            notificationId = vacationId;
+            notificationId = Integer.parseInt(notificationId + alarmEnd);
             String endDate = vacation.getEndDate().toString();
             if (endNotificationEnabled) {
                 cancelAlarm(notificationId);
@@ -212,7 +214,7 @@ public class DetailedVacation extends AppCompatActivity {
     }
 
 
-    private void setAlarm(String dateToNotify, int alarmType, int notificationId) {
+    private void setAlarm(String dateToNotify, String alarmType, int notificationId) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
         Date myDate = null;
         try {
@@ -223,6 +225,7 @@ public class DetailedVacation extends AppCompatActivity {
         long triggerDate = myDate.getTime();
         Intent notifyStartIntent = new Intent(DetailedVacation.this, AlarmReceiver.class);
         notifyStartIntent.putExtra("vacation_id", vacationId);
+        notifyStartIntent.putExtra("notification_id", notificationId);
         notifyStartIntent.putExtra("alarm_type", alarmType);
         notifyStartIntent.putExtra("date", dateToNotify);
         notifyStartIntent.putExtra("vacation_title", vacation.getTitle());
@@ -233,7 +236,7 @@ public class DetailedVacation extends AppCompatActivity {
     }
 
     public void cancelAlarm(int notificationId) {
-        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        Intent alarmIntent = new Intent(DetailedVacation.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(DetailedVacation.this, notificationId, alarmIntent, PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
         if (pendingIntent != null) {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
