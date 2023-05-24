@@ -22,10 +22,10 @@ import java.util.concurrent.Future;
 
 public class VacationRepository {
     private final VacationDao mVacationDao;
-    private ExcursionDao mExcursionDao;
+    private final ExcursionDao mExcursionDao;
     private List<Vacation> mAllVacations;
 
-    private static int NUMBER_OF_THREADS = 4;
+    private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public VacationRepository(Application application) {
