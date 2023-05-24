@@ -36,6 +36,11 @@ public class EL_RecyclerViewAdapter extends RecyclerView.Adapter<EL_RecyclerView
         this.excursionList = excursions;
         notifyDataSetChanged();
     }
+
+    public Excursion getExcursionAtPosition(int position) {
+        return excursionList.get(position);
+    }
+
     @NonNull
     @Override
     public EL_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,9 +65,7 @@ public class EL_RecyclerViewAdapter extends RecyclerView.Adapter<EL_RecyclerView
             }
         });
 
-
     }
-
 
 
     @Override

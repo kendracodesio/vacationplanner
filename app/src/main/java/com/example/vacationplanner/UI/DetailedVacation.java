@@ -1,6 +1,9 @@
 package com.example.vacationplanner.UI;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +57,6 @@ public class DetailedVacation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_vacation);
 
-
         vacationRepository = new VacationRepository(getApplication());
         excursionList = new ArrayList<>();
 
@@ -75,10 +77,7 @@ public class DetailedVacation extends AppCompatActivity {
                     vacationDetails.setText(formatVacationDetails(vacation));
                 }
             });
-
-
         }
-
         excursionListRecyclerView = findViewById(R.id.excursionList);
         //Initialize the RecyclerView Adapter
         //gets the excursionId when excursion item is clicked so details can be shown in the DetailedExcursion activity
@@ -93,6 +92,9 @@ public class DetailedVacation extends AppCompatActivity {
         excursionListRecyclerView.setAdapter(el_recyclerViewAdapter);
         excursionListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //method call to setup swipe to delete for excursion items in recycler view
+        setupRecyclerViewSwipeToDelete(excursionListRecyclerView);
+
 
         vacationRepository.getExcursionsByVacation(vacationId).observe(this, excursions -> {
             if (excursions != null) {
@@ -101,7 +103,6 @@ public class DetailedVacation extends AppCompatActivity {
                 el_recyclerViewAdapter.setExcursion(excursions);
             }
         });
-
 
         //button to add excursion to list
         addExcursionBtn.setOnClickListener(v -> {
@@ -239,6 +240,42 @@ public class DetailedVacation extends AppCompatActivity {
             alarmManager.cancel(pendingIntent);
             Toast.makeText(DetailedVacation.this, "Notification cancelled", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void setupRecyclerViewSwipeToDelete(RecyclerView recyclerView) {
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                //Get the position of the item to be deleted
+                int position = viewHolder.getAdapterPosition();
+                Excursion excursionToDelete = el_recyclerViewAdapter.getExcursionAtPosition(position);
+                //Create an AlertDialog to ask for confirmation
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailedVacation.this);
+                builder.setMessage("Are you sure you want to delete this excursion?")
+                        .setPositiveButton("Yes", (dialog, id) -> {
+                            //If the user confirms, perform the delete
+                            vacationRepository.deleteExcursion(excursionToDelete);
+                        })
+                        .setNegativeButton("No", (dialog, id) -> {
+                            //If the user cancels, don't delete and reset the swipe
+                            el_recyclerViewAdapter.notifyItemChanged(position); //Reset swipe
+                        });
+                //Create the AlertDialog object and show it
+                builder.create().show();
+            }
+        };
+
+        //Create ItemTouchHelper and attach it to the RecyclerView
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private String formatVacationDetails(@NotNull Vacation vacation) {
