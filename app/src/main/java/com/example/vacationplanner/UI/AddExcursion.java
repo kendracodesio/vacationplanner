@@ -26,9 +26,12 @@ import java.util.Date;
 public class AddExcursion extends AppCompatActivity {
 
     VacationRepository vacationRepository;
-    private int vacationId;
-    private Vacation vacation;
+    int vacationId;
+    Vacation vacation;
 
+    Date vacationStartDate;
+
+    Date vacationEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +48,20 @@ public class AddExcursion extends AppCompatActivity {
         Button selectExcursionDate = findViewById(R.id.excursionDateBtn);
         Button createExcursionBtn = findViewById(R.id.createExcursionBtn);
 
-        selectExcursionDate.setOnClickListener(v -> {showDatePickerDialog(selectExcursionDate);});
-
-
         if (vacationId != -1) {
 
             vacationRepository.getVacationById(vacationId).observe(this, vacation -> {
                 if (vacation != null) {
                     this.vacation = vacation;
                     this.vacationId = vacation.getId();
+                    this.vacationStartDate = vacation.getStartDate();
+                    this.vacationEndDate = vacation.getEndDate();
                     vacationTitle.setText(vacation.getTitle());
-
+                    if (vacationStartDate != null && vacationEndDate != null) {
+                        selectExcursionDate.setOnClickListener(v -> {
+                            showDatePickerDialog(selectExcursionDate, vacationStartDate, vacationEndDate);
+                        });
+                    }
                 }
             });
         }
@@ -83,7 +89,7 @@ public class AddExcursion extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.cancel_menu, menu);
         return true;
@@ -91,7 +97,7 @@ public class AddExcursion extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_cancel) {
             finish();
             return true;
@@ -100,7 +106,8 @@ public class AddExcursion extends AppCompatActivity {
 
         }
     }
-    private void showDatePickerDialog(Button button) {
+
+    private void showDatePickerDialog(Button button, Date minDate, Date maxDate) {
         final Calendar calendar = Calendar.getInstance();
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -114,6 +121,9 @@ public class AddExcursion extends AppCompatActivity {
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.getDatePicker().setMinDate(minDate.getTime());
+        datePickerDialog.getDatePicker().setMaxDate(maxDate.getTime());
 
         datePickerDialog.show();
     }

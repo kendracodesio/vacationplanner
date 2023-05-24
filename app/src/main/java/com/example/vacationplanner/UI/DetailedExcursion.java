@@ -42,9 +42,8 @@ public class DetailedExcursion extends AppCompatActivity {
         TextView vacationTitle = findViewById(R.id.vacationTitle3);
         TextView excursionTitle = findViewById(R.id.excursionTitle);
         TextView excursionDate = findViewById(R.id.excursionDate);
-//        Button editExcursionBtn = findViewById(R.id.editExcursionBtn);
+        Button editExcursionBtn = findViewById(R.id.editExcursionBtn);
 //        Button homeButton = findViewById(R.id.homeButton);
-
 
 
         if (excursionId != -1) {
@@ -66,6 +65,12 @@ public class DetailedExcursion extends AppCompatActivity {
 
             });
         }
+
+        editExcursionBtn.setOnClickListener(v -> {
+            Intent editIntent = new Intent(DetailedExcursion.this, EditExcursion.class);
+            editIntent.putExtra("excursion_id", excursionId);
+            startActivity(editIntent);
+        });
 
     }
 
