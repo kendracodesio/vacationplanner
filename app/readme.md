@@ -36,10 +36,21 @@ Finally, the ability to share vacation details with others has never easier. The
 
 9. **Deleting a vacation:** To delete a vacation, go back to the 'My Vacations' screen, swipe left on the desired vacation, and confirm deletion in the pop-up dialog. Please note, you must first delete any associated excursions before removing a vacation.
 
+10. **Notes about Notifications:** Ensure that your device has notifications enabled to receive updates from the Vacation Planner app. For testing purposes, I used a Pixel 3a API 33 arm64-v8a emulator. If you're using a similar device, you can adjust your settings as follows to receive notifications:
+   - Navigate to `Settings` > `Notifications` > `App settings`.
+   - From the dropdown menu, select `All apps`.
+   - Locate and select `Vacation Planner`, then toggle notifications on.
+
+Additionally, you can view past notifications by enabling 'Notification History':
+- From the `Notifications` section in `Settings`, select `Notification History`.
+- Toggle on `Use Notification History`.
+
+By accessing the notification history, you can modify settings for applications notifications, including whether they pop-up on the screen. Find a past notification from the Vacation Planner app press the arrow down and click on the notification.
+
 ### Android Version for APK Deployment
 The signed APK is deployed for Android 13 (Tiramisu), API level 33
 
-### Link to GitLab Repsitory
+### Link to GitLab Repository
 https://gitlab.com/kendreyn/d308
 
 ### Sources
