@@ -7,18 +7,18 @@
     tools:context=".UI.DetailedExcursion">
 
     <Button
-        android:id="@+id/homeButton"
+        android:id="@+id/backButton"
         android:layout_width="262dp"
         android:layout_height="62dp"
         android:background="@drawable/rounded_button"
-        android:text="@string/back_to_home"
+        android:text="back to all vacations"
         android:textColor="@color/design_default_color_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintVertical_bias="0.931" />
 
     <TextView
         android:id="@+id/excursionDate"

@@ -1,7 +1,5 @@
 package com.example.vacationplanner.UI;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -21,15 +19,12 @@ import com.example.vacationplanner.R;
 import com.example.vacationplanner.database.VacationRepository;
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class DetailedExcursion extends AppCompatActivity {
@@ -57,7 +52,7 @@ public class DetailedExcursion extends AppCompatActivity {
         TextView excursionTitle = findViewById(R.id.excursionTitle);
         TextView excursionDate = findViewById(R.id.excursionDate);
         Button editExcursionBtn = findViewById(R.id.editExcursionBtn);
-//        Button homeButton = findViewById(R.id.homeButton);
+        Button homeButton = findViewById(R.id.backButton);
 
 
         if (excursionId != -1) {
@@ -83,8 +78,12 @@ public class DetailedExcursion extends AppCompatActivity {
         editExcursionBtn.setOnClickListener(v -> {
             Intent editIntent = new Intent(DetailedExcursion.this, EditExcursion.class);
             editIntent.putExtra("excursion_id", excursionId);
-            editIntent.putExtra("vacation_id", vacationId);
             startActivity(editIntent);
+        });
+
+        homeButton.setOnClickListener(v -> {
+            Intent backToAllVacationIntent = new Intent(DetailedExcursion.this, VacationList.class);
+            startActivity(backToAllVacationIntent);
         });
 
         //setting shared preferences
@@ -175,8 +174,6 @@ public class DetailedExcursion extends AppCompatActivity {
         }
 
     }
-
-
 
 
     private String formatExcursionDate(@NotNull Excursion excursion) {
